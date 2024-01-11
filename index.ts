@@ -8,12 +8,13 @@ const random50     = fs.readFileSync(__dirname + '/data/numbers50.txt');
 const random100    = fs.readFileSync(__dirname + '/data/numbers100.txt');
 const random500    = fs.readFileSync(__dirname + '/data/numbers500.txt');
 const random1000   = fs.readFileSync(__dirname + '/data/numbers1000.txt');
+const random100000 = fs.readFileSync(__dirname + '/data/numbers100000.txt');
 const random09     = fs.readFileSync(__dirname + '/data/numbers_0-9_900.txt');
 const random1099   = fs.readFileSync(__dirname + '/data/numbers_10-99_900.txt');
 const random100999 = fs.readFileSync(__dirname + '/data/numbers_100-999_900.txt');
 
 const composer = new Composer([
-    new NotationComposer(32),
+    new NotationComposer(36),
     new SpaceComposer(),
 ]);
 
@@ -22,6 +23,7 @@ const data = [
     { string: random100.toString(), name: 'random 100' },
     { string: random500.toString(), name: 'random 500' },
     { string: random1000.toString(), name: 'random 1000' },
+    { string: random100000.toString(), name: 'random 100000' },
     { string: random09.toString(), name: 'random 0-9' },
     { string: random1099.toString(), name: 'random 10-99' },
     { string: random100999.toString(), name: 'random 100-990' },
