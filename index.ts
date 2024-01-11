@@ -1,4 +1,4 @@
-import { Composer } from './modules/composer/composer';
+import { Composer } from './src/modules/composer/composer';
 
 
 const composer = new Composer([]);
