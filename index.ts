@@ -2,12 +2,12 @@ import { Composer } from './src/modules/composer/composer';
 import * as fs from 'fs';
 import {
     NotationComposer,
-} from './src/modules/composer/composers/notation/notation-composer';
-import { SpaceComposer } from './src/modules/composer/composers/space/space-composer';
-import { SumComposer } from './src/modules/composer/composers/summator/sum-composer';
+} from './src/modules/composer/composers/simple/notation/notation-composer';
+import { SpaceComposer } from './src/modules/composer/composers/simple/space/space-composer';
+import { SumComposer } from './src/modules/composer/composers/simple/summator/sum-composer';
 import {
     RepetitionComposer,
-} from './src/modules/composer/composers/repetition/repetition-composer';
+} from './src/modules/composer/composers/simple/repetition/repetition-composer';
 import { ComposerBenchmark } from './src/modules/composer-benchmark/composer-benchmark';
 import {
     ComposerBenchmarkResult, IComposerBenchmark,
