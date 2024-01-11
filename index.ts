@@ -1,7 +1,10 @@
 import { Composer } from './src/modules/composer/composer';
 import * as fs from 'fs';
-import { NotationComposer } from './src/modules/composer/composers/notation-composer';
-import { SpaceComposer } from './src/modules/composer/composers/space-composer';
+import {
+    NotationComposer,
+} from './src/modules/composer/composers/notation/notation-composer';
+import { SpaceComposer } from './src/modules/composer/composers/space/space-composer';
+import { SumComposer } from './src/modules/composer/composers/summator/sum-composer';
 
 
 const random50     = fs.readFileSync(__dirname + '/data/numbers50.txt');
@@ -13,7 +16,12 @@ const random09     = fs.readFileSync(__dirname + '/data/numbers_0-9_900.txt');
 const random1099   = fs.readFileSync(__dirname + '/data/numbers_10-99_900.txt');
 const random100999 = fs.readFileSync(__dirname + '/data/numbers_100-999_900.txt');
 
-const composer = new Composer([
+
+const withoutSaveOrderComposer = new Composer([
+    new SumComposer(),
+]);
+
+const saveOrderComposer = new Composer([
     new NotationComposer(36),
     new SpaceComposer(),
 ]);
@@ -30,9 +38,9 @@ const data = [
 ]
     .map(({ string, name }) => {
         const stringSize      = new Blob([ string ]).size;
-        const composeString   = composer.compose(string);
+        const composeString   = saveOrderComposer.compose(string);
         const composeSize     = new Blob([ composeString ]).size;
-        const decomposeString = composer.decompose(composeString);
+        const decomposeString = saveOrderComposer.decompose(composeString);
         const decomposeSize   = new Blob([ decomposeString ]).size;
         return { list: name, stringSize, composeSize, decomposeSize };
     });
@@ -54,6 +62,15 @@ console.log('\n________________________________________________');
 console.log('VALID CHECK');
 console.log('CORRECT: ', data.map((item) => `\t\t${ item.stringSize === item.decomposeSize }`).join(''));
 
+console.log('\n----------------');
+let str  = random1000.toString();
+let comp = '';
+let deco = '';
+console.log('string:', str);
+console.log('\ncomposed:\n', comp = withoutSaveOrderComposer.compose(str));
+console.log('\ndecomposed:\n', deco = withoutSaveOrderComposer.decompose(comp));
+console.log('valid:', str.length === deco.length);
+console.log('economy:', 100 - 100 / str.length * comp.length + '%');
 /*
  const chunks     = string.split(/\s/g);
  const decoChunks = decomposeString.split(/\s/g);

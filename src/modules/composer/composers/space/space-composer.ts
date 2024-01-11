@@ -1,4 +1,4 @@
-import { IComposer } from '../composer.interface';
+import { IComposer } from '../../composer.interface';
 
 
 export class SpaceComposer implements IComposer {
