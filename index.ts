@@ -5,6 +5,9 @@ import {
 } from './src/modules/composer/composers/notation/notation-composer';
 import { SpaceComposer } from './src/modules/composer/composers/space/space-composer';
 import { SumComposer } from './src/modules/composer/composers/summator/sum-composer';
+import {
+    RepetitionComposer,
+} from './src/modules/composer/composers/repetition/repetition-composer';
 
 
 const random50     = fs.readFileSync(__dirname + '/data/numbers50.txt');
@@ -19,6 +22,7 @@ const random100999 = fs.readFileSync(__dirname + '/data/numbers_100-999_900.txt'
 
 const withoutSaveOrderComposer = new Composer([
     new SumComposer(),
+    new RepetitionComposer(),
 ]);
 
 const saveOrderComposer = new Composer([
