@@ -26,6 +26,7 @@ describe('NotationComposer', () => {
 
     test('[DATA_LOSS] Validators check', () => {
         const decomposed: string = composer.decompose(composedString);
+        console.log(decomposed);
         expect(validators.every((validator) => validator.validate(originalString, decomposed))).toBe(true);
     });
 });

@@ -12,7 +12,7 @@ describe('SumComposer', () => {
         new DataLossComposerValidator(),
     ];
     const originalString: string = '32 13 99 0 1 0 0 0 1 999';
-    const composedString: string = '000010x12x19x67c900';
+    const composedString: string = '000010_12_19_67-900';
 
     test('[COMPOSE] String with spaces with solo/double symbols', () => {
         const composed: string = composer.compose(originalString);

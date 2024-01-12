@@ -15,9 +15,9 @@ export class SumComposer implements IComposer {
             const number = numbers[i];
             const delta  = number - previous;
             if (delta > 99) {
-                result += `c${ delta }`;
+                result += `-${ delta }`;
             } else if (delta > 9) {
-                result += `x${ delta }`;
+                result += `_${ delta }`;
             } else {
                 result += delta;
             }
@@ -42,11 +42,11 @@ export class SumComposer implements IComposer {
     private _splitDecomposed (string: string): number[] {
         let result: number[] = [];
         for (let i = 0; i < string.length;) {
-            if (string[i] === 'c') {
+            if (string[i] === '-') {
                 result.push(Number(string.slice(i + 1, i + 4)));
                 i += 4;
                 continue;
-            } else if (string[i] === 'x') {
+            } else if (string[i] === '_') {
                 result.push(Number(string.slice(i + 1, i + 3)));
                 i += 3;
                 continue;

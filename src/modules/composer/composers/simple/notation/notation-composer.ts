@@ -10,7 +10,7 @@ export class NotationComposer implements IComposer {
     }
 
     compose (data: string): string {
-        if (this._notation < 2 || this._notation > 36) {
+        if (this._notation < 2 || this._notation > this._digits.length) {
             return data;
         }
 
@@ -32,7 +32,7 @@ export class NotationComposer implements IComposer {
     }
 
     decompose (data: string): string {
-        if (this._notation < 2 || this._notation > 36) {
+        if (this._notation < 2 || this._notation > this._digits.length) {
             return data;
         }
 

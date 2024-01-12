@@ -40,7 +40,7 @@ export class RepetitionComposer implements IComposer {
                 continue;
             }
 
-            if (symbol === 'z') {
+            if (symbol === '!') {
                 const repeats: number        = afterDot ? Number(afterDot)
                                                         : Number(data[i - 1]);
                 const repeatedString: string = data[i + 1];
@@ -69,9 +69,9 @@ export class RepetitionComposer implements IComposer {
 
     private _composeFormat (repeats: number, symbol: string): string {
         if (repeats > 9) {
-            return `.${ repeats }z${ symbol }`;
+            return `.${ repeats }!${ symbol }`;
         } else if (repeats > 3) {
-            return `${ repeats }z${ symbol }`;
+            return `${ repeats }!${ symbol }`;
         } else {
             return `${ symbol }`.repeat(repeats);
         }

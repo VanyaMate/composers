@@ -17,7 +17,7 @@ const compositeComposedString: string = compositeComposer.compose(data);
 
 \
 Так же каждый `IComposer` может использоваться в `IComposerBenchmark`, а именно, для этого уже есть `ComposerBenchmark`.
-В метод sample передает название бенчмарка, composer и данные в формате массива объектов с названием данных и самими данными.
+В метод sample передает название бенчмарка, composer и данные в формате `ComposerData` массива объектов с названием данных и самими данными.
 
 ```typescript
 const benchmark: IComposerBenchmark                   = new ComposerBenchmark([ new DataLossComposerValidator() ]);

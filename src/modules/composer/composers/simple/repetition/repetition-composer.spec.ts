@@ -18,7 +18,7 @@ describe('RepetitionComposer', () => {
     originalString += 1;
     originalString += '0'.repeat(444);
     originalString += '123';
-    const composedString: string = '00017z01.444z0123';
+    const composedString: string = '00017!01.444!0123';
 
     test('[COMPOSE] String with repeats', () => {
         const composed: string = composer.compose(originalString);
