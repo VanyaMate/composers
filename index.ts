@@ -49,7 +49,7 @@ const withoutSaveOrderComposer: IComposer = new Composer([
 const withoutSaveOrderWithLzutf8Composer: IComposer = new Composer([
     new SumComposer(),
     new RepetitionComposer(),
-    new Lzutf8Composer('StorageBinaryString'),
+    new Lzutf8Composer('BinaryString'),
 ]);
 
 const saveOrderComposer: IComposer = new Composer([
