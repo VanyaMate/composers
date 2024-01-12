@@ -14,7 +14,7 @@ import {
 } from './src/modules/composer/composers/simple/repetition/repetition-composer';
 import { ComposerBenchmark } from './src/modules/composer-benchmark/composer-benchmark';
 import {
-    ComposerBenchmarkResult, IComposerBenchmark,
+    ComposerBenchmarkResult, ComposerData, IComposerBenchmark,
 } from './src/modules/composer-benchmark/composer-benchmark.interface';
 import {
     IComposerBenchmarkView,
@@ -24,7 +24,11 @@ import {
 } from './src/modules/composer-benchmark/view/console/console-composer-benchmark-view';
 import {
     Lzutf8Composer,
-} from './src/modules/composer/composers/third-party/lzutf8-composer';
+} from './src/modules/composer/composers/third-party/lzutf8/lzutf8-composer';
+import {
+    DataLossComposerValidator,
+} from './src/modules/composer-validator/validators/data-loss-composer-validator';
+import { IComposer } from './src/modules/composer/composer.interface';
 
 
 const random50     = fs.readFileSync(__dirname + '/data/numbers50.txt');
@@ -37,23 +41,23 @@ const random1099   = fs.readFileSync(__dirname + '/data/numbers_10-99_900.txt');
 const random100999 = fs.readFileSync(__dirname + '/data/numbers_100-999_900.txt');
 
 
-const withoutSaveOrderComposer = new Composer([
+const withoutSaveOrderComposer: IComposer = new Composer([
     new SumComposer(),
     new RepetitionComposer(),
 ]);
 
-const withoutSaveOrderWithLzutf8Composer = new Composer([
+const withoutSaveOrderWithLzutf8Composer: IComposer = new Composer([
     new SumComposer(),
     new RepetitionComposer(),
     new Lzutf8Composer('StorageBinaryString'),
 ]);
 
-const saveOrderComposer = new Composer([
+const saveOrderComposer: IComposer = new Composer([
     new NotationComposer(36),
     new SpaceComposer(),
 ]);
 
-const dataList = [
+const dataList: ComposerData[] = [
     {
         title: 'random 50', data: random50.toString(),
     },
@@ -80,8 +84,9 @@ const dataList = [
     },
 ];
 
-const benchmarkView: IComposerBenchmarkView                    = new ConsoleComposerBenchmarkView({ headerLength: 180 });
-const benchmark: IComposerBenchmark                            = new ComposerBenchmark();
+const benchmarkView: IComposerBenchmarkView = new ConsoleComposerBenchmarkView({ headerLength: 180 });
+const benchmark: IComposerBenchmark         = new ComposerBenchmark([ new DataLossComposerValidator() ]);
+
 const saveOrderResult: ComposerBenchmarkResult                 = benchmark.sample('[Notation, Space] save data', saveOrderComposer, dataList);
 const soloLzutf8: ComposerBenchmarkResult                      = benchmark.sample('[Lzutf8-Binary] save data', new Lzutf8Composer('BinaryString'), dataList);
 const withoutSaveOrderResult: ComposerBenchmarkResult          = benchmark.sample('[Sum, Repetition] no save data', withoutSaveOrderComposer, dataList);

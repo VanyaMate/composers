@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { getRandomInt } from '../../helpers/math/getRandomInt';
 
 
-export class DataGenerator implements IDataGenerator {
+export class NumberListFileGenerator implements IDataGenerator {
     constructor (private readonly _folder: string) {
     }
 

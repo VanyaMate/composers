@@ -4,9 +4,13 @@ import {
     ComposerData,
     IComposerBenchmark,
 } from './composer-benchmark.interface';
+import { IComposerValidator } from '../composer-validator/composer-validator.interface';
 
 
 export class ComposerBenchmark implements IComposerBenchmark {
+    constructor (private readonly _validators: IComposerValidator[] = []) {
+    }
+
     sample (title: string, composer: IComposer, dataList: ComposerData[]): ComposerBenchmarkResult {
         return {
             title  : title,
@@ -26,23 +30,12 @@ export class ComposerBenchmark implements IComposerBenchmark {
                     timeToCompose  : finishComposeTime - startComposeTime,
                     timeToDecompose: finishDecomposeTime - startDecomposeTime,
                     efficiency     : 100 - 100 / originalSize * composeSize,
-                    dataLoss       : !this._validData(dataItem.data, decomposed),
+                    dataLoss       : !this._validators.every((validator) => validator.validate(dataItem.data, decomposed)),
                     dataChanges    : dataItem.data !== decomposed,
                     composeSize    : composeSize,
                     originalSize   : originalSize,
                 };
             }),
         };
-    }
-
-    private _validData (original: string, decomposed: string): boolean {
-        const originalNumbers: number[]   = original.split(' ').map(Number).sort((a, b) => a - b);
-        const decomposedNumbers: number[] = decomposed.split(' ').map(Number).sort((a, b) => a - b);
-        for (let i = 0; i < originalNumbers.length; i++) {
-            if (originalNumbers[i] !== decomposedNumbers[i]) {
-                return false;
-            }
-        }
-        return true;
     }
 }

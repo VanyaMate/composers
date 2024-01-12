@@ -1,4 +1,4 @@
-import { IComposer } from '../../composer.interface';
+import { IComposer } from '../../../composer.interface';
 import LZUTF8 from 'lzutf8';
 
 
