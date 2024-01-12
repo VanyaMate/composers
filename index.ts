@@ -3,8 +3,12 @@ import * as fs from 'fs';
 import {
     NotationComposer,
 } from './src/modules/composer/composers/simple/notation/notation-composer';
-import { SpaceComposer } from './src/modules/composer/composers/simple/space/space-composer';
-import { SumComposer } from './src/modules/composer/composers/simple/summator/sum-composer';
+import {
+    SpaceComposer,
+} from './src/modules/composer/composers/simple/space/space-composer';
+import {
+    SumComposer,
+} from './src/modules/composer/composers/simple/summator/sum-composer';
 import {
     RepetitionComposer,
 } from './src/modules/composer/composers/simple/repetition/repetition-composer';
@@ -67,7 +71,7 @@ const dataList = [
     },
 ];
 
-const benchmarkView: IComposerBenchmarkView           = new ConsoleComposerBenchmarkView({ headerLength: 181 });
+const benchmarkView: IComposerBenchmarkView           = new ConsoleComposerBenchmarkView({ headerLength: 180 });
 const benchmark: IComposerBenchmark                   = new ComposerBenchmark();
 const saveOrderResult: ComposerBenchmarkResult        = benchmark.sample('save order composer', saveOrderComposer, dataList);
 const withoutSaveOrderResult: ComposerBenchmarkResult = benchmark.sample('without save order composer', withoutSaveOrderComposer, dataList);

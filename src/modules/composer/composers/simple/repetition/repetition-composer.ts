@@ -16,17 +16,14 @@ export class RepetitionComposer implements IComposer {
             if (symbol === currentSymbol) {
                 repeats += 1;
                 continue;
-            } else if (repeats > 9) {
-                result += `.${ repeats }z${ currentSymbol }`;
-            } else if (repeats > 3) {
-                result += `${ repeats }z${ currentSymbol }`;
             } else {
-                result += `${ currentSymbol }`.repeat(repeats);
+                result += this._composeFormat(repeats, currentSymbol);
             }
             repeats       = 1;
             currentSymbol = symbol;
         }
 
+        result += this._composeFormat(repeats, currentSymbol);
         return result;
     }
 
@@ -44,8 +41,12 @@ export class RepetitionComposer implements IComposer {
             }
 
             if (symbol === 'z') {
-                const repeats: number        = Number(afterDot);
+                const repeats: number        = afterDot ? Number(afterDot)
+                                                        : Number(data[i - 1]);
                 const repeatedString: string = data[i + 1];
+                if (!dotFind) {
+                    result = result.slice(0, -1);
+                }
                 result += repeatedString.repeat(repeats);
                 afterDot = '';
                 dotFind  = false;
@@ -64,5 +65,15 @@ export class RepetitionComposer implements IComposer {
         }
 
         return result;
+    }
+
+    private _composeFormat (repeats: number, symbol: string): string {
+        if (repeats > 9) {
+            return `.${ repeats }z${ symbol }`;
+        } else if (repeats > 3) {
+            return `${ repeats }z${ symbol }`;
+        } else {
+            return `${ symbol }`.repeat(repeats);
+        }
     }
 }

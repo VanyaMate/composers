@@ -23,12 +23,23 @@ export class ComposerBenchmark implements IComposerBenchmark {
                     timeToCompose  : finishComposeTime - startComposeTime,
                     timeToDecompose: finishDecomposeTime - startDecomposeTime,
                     efficiency     : 100 - 100 / dataItem.data.length * composed.length,
-                    dataLoss       : dataItem.data.length !== decomposed.length,
+                    dataLoss       : !this._validData(dataItem.data, decomposed),
                     dataChanges    : dataItem.data !== decomposed,
                     composeSize    : composed.length,
                     originalSize   : dataItem.data.length,
                 };
             }),
         };
+    }
+
+    private _validData (original: string, decomposed: string): boolean {
+        const originalNumbers: number[]   = original.split(' ').map(Number).sort((a, b) => a - b);
+        const decomposedNumbers: number[] = decomposed.split(' ').map(Number).sort((a, b) => a - b);
+        for (let i = 0; i < originalNumbers.length; i++) {
+            if (originalNumbers[i] !== decomposedNumbers[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 }

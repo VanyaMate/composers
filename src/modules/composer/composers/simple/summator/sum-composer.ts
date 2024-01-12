@@ -8,10 +8,10 @@ export class SumComposer implements IComposer {
             .map(Number)
             .sort((a, b) => a - b);
 
-        let previous: number = numbers[0];
-        let result: string   = previous.toString() ?? '';
+        let previous: number = 0;
+        let result: string   = '';
 
-        for (let i = 1; i < numbers.length; i++) {
+        for (let i = 0; i < numbers.length; i++) {
             const number = numbers[i];
             const delta  = number - previous;
             if (delta > 99) {
