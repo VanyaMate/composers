@@ -22,6 +22,9 @@ import {
 import {
     ConsoleComposerBenchmarkView,
 } from './src/modules/composer-benchmark/view/console/console-composer-benchmark-view';
+import {
+    Lzutf8Composer,
+} from './src/modules/composer/composers/third-party/lzutf8-composer';
 
 
 const random50     = fs.readFileSync(__dirname + '/data/numbers50.txt');
@@ -37,6 +40,12 @@ const random100999 = fs.readFileSync(__dirname + '/data/numbers_100-999_900.txt'
 const withoutSaveOrderComposer = new Composer([
     new SumComposer(),
     new RepetitionComposer(),
+]);
+
+const withoutSaveOrderWithLzutf8Composer = new Composer([
+    new SumComposer(),
+    new RepetitionComposer(),
+    new Lzutf8Composer('StorageBinaryString'),
 ]);
 
 const saveOrderComposer = new Composer([
@@ -71,10 +80,14 @@ const dataList = [
     },
 ];
 
-const benchmarkView: IComposerBenchmarkView           = new ConsoleComposerBenchmarkView({ headerLength: 180 });
-const benchmark: IComposerBenchmark                   = new ComposerBenchmark();
-const saveOrderResult: ComposerBenchmarkResult        = benchmark.sample('save order composer', saveOrderComposer, dataList);
-const withoutSaveOrderResult: ComposerBenchmarkResult = benchmark.sample('without save order composer', withoutSaveOrderComposer, dataList);
+const benchmarkView: IComposerBenchmarkView                    = new ConsoleComposerBenchmarkView({ headerLength: 180 });
+const benchmark: IComposerBenchmark                            = new ComposerBenchmark();
+const saveOrderResult: ComposerBenchmarkResult                 = benchmark.sample('[Notation, Space] save data', saveOrderComposer, dataList);
+const soloLzutf8: ComposerBenchmarkResult                      = benchmark.sample('[Lzutf8-Binary] save data', new Lzutf8Composer('BinaryString'), dataList);
+const withoutSaveOrderResult: ComposerBenchmarkResult          = benchmark.sample('[Sum, Repetition] no save data', withoutSaveOrderComposer, dataList);
+const withoutSaveWithLzutfOrderResult: ComposerBenchmarkResult = benchmark.sample('[Sum, Repetition, Lzutf8-Binary] no save data', withoutSaveOrderWithLzutf8Composer, dataList);
 
 benchmarkView.render(saveOrderResult);
+benchmarkView.render(soloLzutf8);
 benchmarkView.render(withoutSaveOrderResult);
+benchmarkView.render(withoutSaveWithLzutfOrderResult);
