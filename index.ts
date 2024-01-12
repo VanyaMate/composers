@@ -87,10 +87,10 @@ const dataList: ComposerData[] = [
 const benchmarkView: IComposerBenchmarkView = new ConsoleComposerBenchmarkView({ headerLength: 180 });
 const benchmark: IComposerBenchmark         = new ComposerBenchmark([ new DataLossComposerValidator() ]);
 
-const saveOrderResult: ComposerBenchmarkResult                 = benchmark.sample('[Notation, Space] save data', saveOrderComposer, dataList);
-const soloLzutf8: ComposerBenchmarkResult                      = benchmark.sample('[Lzutf8-Binary] save data', new Lzutf8Composer('BinaryString'), dataList);
-const withoutSaveOrderResult: ComposerBenchmarkResult          = benchmark.sample('[Sum, Repetition] no save data', withoutSaveOrderComposer, dataList);
-const withoutSaveWithLzutfOrderResult: ComposerBenchmarkResult = benchmark.sample('[Sum, Repetition, Lzutf8-Binary] no save data', withoutSaveOrderWithLzutf8Composer, dataList);
+const saveOrderResult: ComposerBenchmarkResult                 = benchmark.sample('[Notation, Space] no change data', saveOrderComposer, dataList);
+const soloLzutf8: ComposerBenchmarkResult                      = benchmark.sample('[Lzutf8-Binary] no change data', new Lzutf8Composer('BinaryString'), dataList);
+const withoutSaveOrderResult: ComposerBenchmarkResult          = benchmark.sample('[Sum, Repetition] change data', withoutSaveOrderComposer, dataList);
+const withoutSaveWithLzutfOrderResult: ComposerBenchmarkResult = benchmark.sample('[Sum, Repetition, Lzutf8-Binary] change data', withoutSaveOrderWithLzutf8Composer, dataList);
 
 benchmarkView.render(soloLzutf8);
 benchmarkView.render(withoutSaveWithLzutfOrderResult);

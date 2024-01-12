@@ -16,7 +16,7 @@
 - `DataGenerator (IDataGenerator)` генератор данных (массивов целых чисел)
 - `ComposerBenchmark (IComposerBenchmark)` для для получения результатов архивации
 - `ConsoleComposerBenchmarkView (IComposerBenchmarkView)` для визуализации результатов в консоли
-  ![Пример визуализации](https://sun9-66.userapi.com/impg/pV51KGT9WejRl0pIbYO2J6Ag8Tke29ydkdnBEA/PqLQ7imy76Y.jpg?size=1449x885&quality=96&sign=ba8154723bf4011dfa8680cf24c61432&type=album)
+  ![Пример визуализации](https://sun1-88.userapi.com/impg/FF9t-fmqOnaOvMXv6szAPuDLy-3GAs7yubCrBw/OJ_nA6viWxs.jpg?size=1448x884&quality=96&sign=3c33a7c325f788f66c77ce6f3a33716d&type=album)
 
 ## Запуск и генерация
 
