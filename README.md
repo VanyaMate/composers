@@ -15,7 +15,7 @@ const compositeComposedString: string = compositeComposer.compose(data);
 // ...
 ```
 
-<br/>
+\
 Так же каждый `IComposer` может использоваться в `IComposerBenchmark`.
 
 ```typescript
@@ -27,7 +27,8 @@ const compositeComposeResult: ComposerBenchmarkResult = benchmark.sample('[Notat
     }
 ]);
 ```
-<br/>
+
+\
 Для красивой визуализации результата бенчмарка есть `IComposerBenchmarkView` а именно `ConsoleComposerBenchmarkView`. Но, если вы хотите, можете спокойно вывести результат в консоль, там обычный объект.
 
 ```typescript
