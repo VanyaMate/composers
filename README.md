@@ -8,7 +8,7 @@ const notationComposer: IComposer  = new NotationComposer(36);
 const spaceComposer: IComposer     = new SpaceComposer();
 const compositeComposer: IComposer = new Composer([ notationComposer, spaceComposer ]);
 
-const data: string                    = 'строка содержащая числа от 0 до 999 (зависит от системы счисления) через пробел';
+const data: string                    = 'строка содержащая числа от X до X (зависит от алгоритмов) через пробел';
 const notationComposedString: string  = notationComposer.compose(data);
 const compositeComposedString: string = compositeComposer.compose(data);
 
@@ -17,25 +17,31 @@ const compositeComposedString: string = compositeComposer.compose(data);
 
 \
 Так же каждый `IComposer` может использоваться в `IComposerBenchmark`, а именно, для этого уже есть `ComposerBenchmark`.
-В метод sample передает название бенчмарка, composer и данные в формате `ComposerData` массива объектов с названием данных и самими данными.
+В метод sample передает название бенчмарка, composer и данные в формате `ComposerData` массива объектов с названием
+данных и самими данными.
 
 ```typescript
 const benchmark: IComposerBenchmark                   = new ComposerBenchmark([ new DataLossComposerValidator() ]);
 const compositeComposeResult: ComposerBenchmarkResult = benchmark.sample('[Notation, Space]', compositeComposedString, [
     {
         title: 'строка для обозначения данных',
-        data : 'строка содержащая числа от 0 до 999 (зависит от системы счисления) через пробел'
+        data : 'строка содержащая числа от X до X (зависит от алгоритмов) через пробел'
     }
 ]);
 ```
 
 \
-Для красивой визуализации результата бенчмарка есть `IComposerBenchmarkView` а именно уже готовый `ConsoleComposerBenchmarkView`. Но, если вы хотите, можете спокойно вывести результат в консоль, там обычный объект.
+Для красивой визуализации результата бенчмарка есть `IComposerBenchmarkView` а именно уже
+готовый `ConsoleComposerBenchmarkView`. Но, если вы хотите, можете спокойно вывести результат в консоль, там обычный
+объект.
 
 ```typescript
 const benchmarkView: IComposerBenchmarkView = new ConsoleComposerBenchmarkView({ headerLength: 180 });
 benchmarkView.render(compositeComposeResult);
 ```
+
+\
+Так же уже есть сгенерированные данные в папке `/data`
 
 ## Реализации интерфейса `IComposer`
 
