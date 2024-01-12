@@ -8,7 +8,7 @@ const notationComposer: IComposer  = new NotationComposer(36);
 const spaceComposer: IComposer     = new SpaceComposer();
 const compositeComposer: IComposer = new Composer([ notationComposer, spaceComposer ]);
 
-const data: string                    = 'строка содержащая числа от X до X (зависит от алгоритмов) через пробел';
+const data: string                    = 'строка содержащая данные в определенном формате (зависит от алгоритмов)';
 const notationComposedString: string  = notationComposer.compose(data);
 const compositeComposedString: string = compositeComposer.compose(data);
 
@@ -25,8 +25,8 @@ const benchmark: IComposerBenchmark                   = new ComposerBenchmark([ 
 const compositeComposeResult: ComposerBenchmarkResult = benchmark.sample('[Notation, Space]', compositeComposedString, [
     {
         title: 'строка для обозначения данных',
-        data : 'строка содержащая числа от X до X (зависит от алгоритмов) через пробел'
-    }
+        data : 'строка содержащая данные в определенном формате (зависит от алгоритмов)',
+    },
 ]);
 ```
 
