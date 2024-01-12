@@ -17,16 +17,19 @@ export class ComposerBenchmark implements IComposerBenchmark {
                 const startDecomposeTime: number  = Date.now();
                 const decomposed: string          = composer.decompose(composed);
                 const finishDecomposeTime: number = Date.now();
+                // TODO: Скорее всего в буффер нужно указавать ТИП, но пока не понятно
+                const composeSize: number         = Buffer.from(composed).byteLength;
+                const originalSize: number        = Buffer.from(dataItem.data).byteLength;
 
                 return {
                     title          : dataItem.title,
                     timeToCompose  : finishComposeTime - startComposeTime,
                     timeToDecompose: finishDecomposeTime - startDecomposeTime,
-                    efficiency     : 100 - 100 / dataItem.data.length * composed.length,
+                    efficiency     : 100 - 100 / originalSize * composeSize,
                     dataLoss       : !this._validData(dataItem.data, decomposed),
                     dataChanges    : dataItem.data !== decomposed,
-                    composeSize    : composed.length,
-                    originalSize   : dataItem.data.length,
+                    composeSize    : composeSize,
+                    originalSize   : originalSize,
                 };
             }),
         };

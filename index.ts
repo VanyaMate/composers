@@ -87,7 +87,7 @@ const soloLzutf8: ComposerBenchmarkResult                      = benchmark.sampl
 const withoutSaveOrderResult: ComposerBenchmarkResult          = benchmark.sample('[Sum, Repetition] no save data', withoutSaveOrderComposer, dataList);
 const withoutSaveWithLzutfOrderResult: ComposerBenchmarkResult = benchmark.sample('[Sum, Repetition, Lzutf8-Binary] no save data', withoutSaveOrderWithLzutf8Composer, dataList);
 
-benchmarkView.render(saveOrderResult);
 benchmarkView.render(soloLzutf8);
-benchmarkView.render(withoutSaveOrderResult);
 benchmarkView.render(withoutSaveWithLzutfOrderResult);
+benchmarkView.render(saveOrderResult);
+benchmarkView.render(withoutSaveOrderResult);
