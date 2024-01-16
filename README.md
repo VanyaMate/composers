@@ -22,7 +22,7 @@ const compositeComposedString: string = compositeComposer.compose(data);
 
 ```typescript
 const benchmark: IComposerBenchmark                   = new ComposerBenchmark([ new DataLossComposerValidator() ]);
-const compositeComposeResult: ComposerBenchmarkResult = benchmark.sample('[Notation, Space]', compositeComposedString, [
+const compositeComposeResult: ComposerBenchmarkResult = benchmark.sample('[Notation, Space]', compositeComposer, [
     {
         title: 'строка для обозначения данных',
         data : 'строка содержащая данные в определенном формате (зависит от алгоритмов)',
