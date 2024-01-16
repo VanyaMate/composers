@@ -29,6 +29,9 @@ import {
     DataLossComposerValidator,
 } from './src/modules/composer-validator/validators/data-loss-composer-validator';
 import { IComposer } from './src/modules/composer/composer.interface';
+import {
+    RepetitionStringsComposer,
+} from './src/modules/composer/composers/simple/repetition-strings/repetition-strings';
 
 
 const random50     = fs.readFileSync(__dirname + '/data/numbers50.txt');
@@ -55,6 +58,12 @@ const withoutSaveOrderWithLzutf8Composer: IComposer = new Composer([
 const saveOrderComposer: IComposer = new Composer([
     new NotationComposer(36),
     new SpaceComposer(),
+]);
+
+const repetitionStringComposer: IComposer = new Composer([
+    new RepetitionStringsComposer(
+        saveOrderComposer,
+    ),
 ]);
 
 const dataList: ComposerData[] = [
@@ -87,12 +96,24 @@ const dataList: ComposerData[] = [
 const benchmarkView: IComposerBenchmarkView = new ConsoleComposerBenchmarkView({ headerLength: 180 });
 const benchmark: IComposerBenchmark         = new ComposerBenchmark([ new DataLossComposerValidator() ]);
 
-const saveOrderResult: ComposerBenchmarkResult                 = benchmark.sample('[Notation, Space] no change data', saveOrderComposer, dataList);
-const soloLzutf8: ComposerBenchmarkResult                      = benchmark.sample('[Lzutf8-Binary] no change data', new Lzutf8Composer('BinaryString'), dataList);
-const withoutSaveOrderResult: ComposerBenchmarkResult          = benchmark.sample('[Sum, Repetition] change data', withoutSaveOrderComposer, dataList);
-const withoutSaveWithLzutfOrderResult: ComposerBenchmarkResult = benchmark.sample('[Sum, Repetition, Lzutf8-Binary] change data', withoutSaveOrderWithLzutf8Composer, dataList);
+const saveOrderResult: ComposerBenchmarkResult                 = benchmark.sample('[Notation, Space]', saveOrderComposer, dataList);
+const soloLzutf8: ComposerBenchmarkResult                      = benchmark.sample('[Lzutf8-Binary]', new Lzutf8Composer('BinaryString'), dataList);
+const withoutSaveOrderResult: ComposerBenchmarkResult          = benchmark.sample('[Sum, Repetition]', withoutSaveOrderComposer, dataList);
+const withoutSaveWithLzutfOrderResult: ComposerBenchmarkResult = benchmark.sample('[Sum, Repetition, Lzutf8-Binary]', withoutSaveOrderWithLzutf8Composer, dataList);
+const repetitionStringComposerResult: ComposerBenchmarkResult  = benchmark.sample('[Repetition-String, Notation, Space]', repetitionStringComposer, dataList);
 
 benchmarkView.render(soloLzutf8);
 benchmarkView.render(withoutSaveWithLzutfOrderResult);
 benchmarkView.render(saveOrderResult);
 benchmarkView.render(withoutSaveOrderResult);
+benchmarkView.render(repetitionStringComposerResult);
+
+/*
+ const data: string       = random09.toString();
+ const composed: string   = repetitionStringComposer.compose(data);
+ const decomposed: string = repetitionStringComposer.decompose(composed);
+ const original: string   = data.split(' ').map(Number).sort((a, b) => a - b).map(String).join(' ');
+
+ console.log(composed);
+ console.log(decomposed);
+ console.log(original);*/
