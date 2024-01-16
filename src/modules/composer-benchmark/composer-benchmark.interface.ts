@@ -13,7 +13,7 @@ export type ComposerBenchmarkResultItem = {
     originalSize: number;
     composeSize: number;
     efficiency: number;
-    dataChanges: boolean;
+    dataChanged: boolean;
     dataLoss: boolean;
 }
 

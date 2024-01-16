@@ -31,7 +31,7 @@ export class ComposerBenchmark implements IComposerBenchmark {
                     timeToDecompose: finishDecomposeTime - startDecomposeTime,
                     efficiency     : 100 - 100 / originalSize * composeSize,
                     dataLoss       : !this._validators.every((validator) => validator.validate(dataItem.data, decomposed)),
-                    dataChanges    : dataItem.data !== decomposed,
+                    dataChanged    : dataItem.data !== decomposed,
                     composeSize    : composeSize,
                     originalSize   : originalSize,
                 };

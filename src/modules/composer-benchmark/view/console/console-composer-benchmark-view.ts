@@ -58,7 +58,7 @@ export class ConsoleComposerBenchmarkView implements IComposerBenchmarkView {
             `${ this._item('COMPOSE_SIZE') }`,
             `${ this._item('EFFICIENCY') }`,
             `${ this._item('DATA_LOSS') }`,
-            `${ this._item('DATA_CHANGES') }`,
+            `${ this._item('DATA_CHANGED') }`,
         );
     }
 
@@ -70,7 +70,7 @@ export class ConsoleComposerBenchmarkView implements IComposerBenchmarkView {
                                                                                 ? '32'
                                                                                 : '31' }m%s\x1b[${ item.dataLoss
                                                                                                    ? '31'
-                                                                                                   : '32' }m%s\x1b[${ item.dataChanges
+                                                                                                   : '32' }m%s\x1b[${ item.dataChanged
                                                                                                                       ? '31'
                                                                                                                       : '32' }m%s\x1b[0m`,
             `${ this._item(item.title) }`,
@@ -80,7 +80,7 @@ export class ConsoleComposerBenchmarkView implements IComposerBenchmarkView {
             `${ this._item(item.composeSize) }`,
             `${ this._item(`~${ item.efficiency.toFixed(4) }%`) }`,
             `${ this._item(item.dataLoss) }`,
-            `${ this._item(item.dataChanges) }`,
+            `${ this._item(item.dataChanged) }`,
         );
     }
 
